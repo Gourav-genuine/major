@@ -1,65 +1,138 @@
-import React, {useState} from 'react';
-import {View, Text, TextInput, Pressable, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, {Component} from 'react';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
+import Antdesign from 'react-native-vector-icons/AntDesign';
 
-const PutTextInput = () => {
-  const navigation = useNavigation();
-  const [nvalue, setNvalue] = useState(null);
-  const showOutput = () => {
-    console.warn(nvalue);
-    if (nvalue) {
-      navigation.navigate('Output', {
-        item: nvalue,
+class MyClass extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      textInput: [],
+      inputData: [],
+    };
+  }
+
+  //function to add TextInput dynamically
+  addTextInput = index => {
+    let textInput = this.state.textInput;
+    textInput.push(
+      <TextInput
+        key={index}
+        style={styles.textInput}
+        placeholder="Enter Input"
+        onChangeText={text => this.addValues(text, index)}
+      />,
+    );
+    this.setState({textInput});
+  };
+
+  //function to remove TextInput dynamically
+  removeTextInput = () => {
+    let textInput = this.state.textInput;
+    let inputData = this.state.inputData;
+    textInput.pop();
+    inputData.pop();
+    this.setState({textInput, inputData});
+  };
+
+  //function to add text from TextInputs into single array
+  addValues = (text, index) => {
+    let dataArray = this.state.inputData;
+    let checkBool = false;
+    if (dataArray.length !== 0) {
+      dataArray.forEach(element => {
+        if (element.index === index) {
+          element.text = text;
+          checkBool = true;
+        }
+      });
+    }
+    if (checkBool) {
+      this.setState({
+        inputData: dataArray,
       });
     } else {
-      console.warn('*Please enter input');
+      dataArray.push({text: text, index: index});
+      this.setState({
+        inputData: dataArray,
+      });
     }
   };
 
-  return (
-    <View
-      style={{
-        flex: 1,
-        marginTop: 60,
-        alignItems: 'center',
-      }}>
-      <Text style={{fontFamily: 'Poppins-Bold', color: 'black', fontSize: 22}}>
-        Input Details
-      </Text>
-      <TextInput
-        placeholder="Enter Input"
-        placeholderTextColor="#000"
-        onChangeText={text => setNvalue(text)}
-        value={nvalue}
-        style={{
-          fontFamily: 'Poppins-Regular',
-          borderRadius: 10,
-          fontSize: 18,
-          marginTop: 50,
-          marginBottom: 30,
-          width: '50%',
-          backgroundColor: '#dbdbdb',
-          color: 'black',
-          textAlign: 'center',
-        }}
-      />
-      <TouchableOpacity onPress={showOutput}>
-        <Text
-          style={{
-            color: 'white',
-            borderRadius: 10,
-            paddingHorizontal: 30,
-            paddingVertical: 10,
-            textAlign: 'center',
-            width: 190,
-            fontSize: 22,
-            backgroundColor: '#2e0547',
-          }}>
-          submit
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+  //function to console the output
+  getValues = () => {
+    if (this.state.inputData.length === 0) {
+      console.warn("Input can't be empty");
+    } else {
+      console.warn('Data', this.state.inputData);
+    }
+  };
 
-export default PutTextInput;
+  render() {
+    return (
+      <View style={{marginTop: 60}}>
+        <View style={styles.row}>
+          <View style={{margin: 10}}>
+            <TouchableOpacity
+              onPress={() => this.addTextInput(this.state.textInput.length)}>
+              <Antdesign name="pluscircleo" size={30} color="#2e0547" />
+            </TouchableOpacity>
+          </View>
+          <View style={{margin: 10}}>
+            <TouchableOpacity onPress={() => this.removeTextInput()}>
+              <Antdesign name="delete" size={30} color="#2e0547" />
+            </TouchableOpacity>
+          </View>
+        </View>
+        {this.state.textInput.map(value => {
+          return value;
+        })}
+        <View style={{marginHorizontal: '18%'}}>
+          <TouchableOpacity onPress={() => this.getValues()}>
+            <Text style={styles.getValueBtn}>Get Values</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  buttonView: {
+    flexDirection: 'row',
+  },
+  textInput: {
+    height: 40,
+    borderColor: 'black',
+    borderWidth: 1,
+    margin: 20,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  getValueBtn: {
+    backgroundColor: '#2e0547',
+    color: 'white',
+    fontFamily: 'Poppins-Medium',
+    fontSize: 20,
+    paddingHorizontal: 30,
+    paddingVertical: 10,
+    textAlign: 'center',
+    alignSelf: 'center',
+    borderRadius: 35,
+  },
+});
+
+export default MyClass;
