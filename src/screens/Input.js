@@ -1,10 +1,8 @@
 import React from 'react';
-// import {View, Text} from 'react-native';
 import PutCameraInput from '../components/PutCameraInput';
-import PutTextInput from '../components/PutTextInput';
 import PutVoiceInput from '../components/PutVoiceInput';
-
-// import {View, Text, TextInput, Pressable, TouchableOpacity} from 'react-native';\
+import PutTextInput from '../components/PutTextInput';
+// import TestTextInput from '../components/TestTextInput';
 
 const Input = ({route}) => {
   const {itemId} = route.params;

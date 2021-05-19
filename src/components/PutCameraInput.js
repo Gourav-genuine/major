@@ -11,8 +11,12 @@ const options = {
 };
 
 const PutCameraInput = () => {
+  // const [image, setImage] = useState(
+  //   'https://d1nz104zbf64va.cloudfront.net/dt/a/o/a-few-words-about-artificial-intelligence-what-is-it.jpg',
+  // );
+
   const [image, setImage] = useState(
-    'https://d1nz104zbf64va.cloudfront.net/dt/a/o/a-few-words-about-artificial-intelligence-what-is-it.jpg',
+    'https://media.giphy.com/media/yAssHyT5KILcB7QR2t/giphy.gif',
   );
 
   const uploadImage = () => {
@@ -64,7 +68,7 @@ const PutCameraInput = () => {
           <TouchableOpacity onPress={chooseImage}>
             <Text
               style={{
-                color: 'white',
+                color: 'black',
                 textAlign: 'center',
                 fontFamily: 'Poppins-Bold',
                 fontSize: 28,
