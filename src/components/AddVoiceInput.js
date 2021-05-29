@@ -12,7 +12,7 @@ import Antdesign from 'react-native-vector-icons/AntDesign';
 const audioRecorderPlayer = new AudioRecorderPlayer();
 audioRecorderPlayer.setSubscriptionDuration(0.09);
 
-const PutVoiceInput = () => {
+const AddVoiceInput = () => {
   const [recordDetails, setRecordDetails] = useState({
     isLoggingIn: false,
     recordSecs: 0,
@@ -167,7 +167,7 @@ const PutVoiceInput = () => {
   );
 };
 
-export default PutVoiceInput;
+export default AddVoiceInput;
 
 const styles = StyleSheet.create({
   container: {

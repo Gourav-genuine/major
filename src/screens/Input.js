@@ -1,10 +1,10 @@
 import React from 'react';
-import PutCameraInput from '../components/PutCameraInput';
-import PutVoiceInput from '../components/PutVoiceInput';
-import PutTextInput from '../components/PutTextInput';
-// import TestTextInput from '../components/TestTextInput';
 
-const Input = ({route}) => {
+import AddCameraInput from '../components/AddCameraInput';
+import AddVoiceInput from '../components/AddVoiceInput';
+import AddTextInput from '../components/AddTextInput';
+
+const Input = ({navigation, route}) => {
   const {itemId} = route.params;
 
   function SwitchCase(props) {
@@ -12,20 +12,20 @@ const Input = ({route}) => {
       case 1:
         return (
           <>
-            <PutTextInput />
+            <AddTextInput navigation={navigation} />
           </>
         );
       case 2:
         return (
           <>
-            <PutCameraInput />
+            <AddCameraInput navigation={navigation} />
           </>
         );
 
       case 3:
         return (
           <>
-            <PutVoiceInput />
+            <AddVoiceInput />
           </>
         );
       default:
