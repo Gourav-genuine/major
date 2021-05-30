@@ -32,7 +32,7 @@ const SelectedtextInput = ({navigation, route}) => {
   const {camFieldLength} = route.params;
   const [image, setImage] = useState([]);
   const [fields, setFields] = useState([]);
-  const[outputData,setOutputData]= useState({})
+  const[outputData,setOutputData]= useState("")
   const isFocused = useIsFocused();
 
   useEffect(() => {
@@ -97,12 +97,12 @@ const SelectedtextInput = ({navigation, route}) => {
   fetch("http://192.168.43.211:15400/predict",request)
   .then((response) => response.json())
   .then((data) => {
-//console.log('DATA',data)
-setOutputData(data);
-})
+    //console.log('DATA',data)
+    setOutputData(data.prediction);
+  })
   .catch((error) => console.log(error))
 
-};
+  };
 
   const chooseImage = async index => {
     const newImg = [...image];
@@ -121,7 +121,7 @@ setOutputData(data);
       }
     });
   };
-  console.log('OUTPUT DATA',outputData)
+  //console.log('OUTPUT DATA',outputData)
 
   return (
     <ScrollView>
