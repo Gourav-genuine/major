@@ -2,8 +2,8 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 const Output = ({navigation, route}) => {
-  const {item} = route.params;
-  // console.warn(item);
+  const {outputData} = route.params;
+  console.log(outputData);
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text
@@ -18,12 +18,12 @@ const Output = ({navigation, route}) => {
           alignItems: 'center',
           borderWidth: 1,
           borderColor: 'black',
-          backgroundColor: 'black',
+          backgroundColor: 'deepskyblue',
           borderRadius: 10,
         }}>
         <Text
           style={{fontFamily: 'Poppins-Regular', color: 'white', fontSize: 18}}>
-          {item}
+          {outputData}
         </Text>
       </View>
     </View>

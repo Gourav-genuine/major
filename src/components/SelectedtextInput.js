@@ -12,9 +12,10 @@ import {
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Antdesign from 'react-native-vector-icons/AntDesign';
 
+
 const options = {
   title: 'Select Picture',
-  storageOptions: {
+  storageOptions: { 
     skipBackup: true,
     path: 'images',
   },
@@ -24,14 +25,25 @@ const options = {
 };
 
 const SelectedtextInput = ({navigation, route}) => {
+
+
+
   const {fieldsLength} = route.params;
   const {camFieldLength} = route.params;
   const [image, setImage] = useState([]);
   const [fields, setFields] = useState([]);
+  const[outputData,setOutputData]= useState({})
   const isFocused = useIsFocused();
 
   useEffect(() => {
     // console.log('CamLength', camFieldLength);
+  // fetch("http://192.168.43.211:15400/")
+  // .then(response => response.json())
+  // .then(data => {
+  //       console.log(data.message);
+  //   })
+  // .catch(err => console.error(err));
+
     const values = [];
     const dimg = [];
     const AddInputs = () => {
@@ -63,12 +75,35 @@ const SelectedtextInput = ({navigation, route}) => {
     values[i].index = i;
     setFields(values);
   };
-  const showInput = () => {
-    console.log('TEXTFIELD', fields);
-    console.log('IMAGE', image);
-  };
 
-  // Camera Handling Functions
+
+
+  const showInput = () => {
+    // console.log('TEXTFIELD', fields);
+    // console.log('IMAGE', image);
+  let request = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+    "variance": fields[0].value,
+    "skewness": fields[1].value,
+    "curtosis": fields[2].value,
+    "entropy": fields[3].value,
+    })
+  };
+  fetch("http://192.168.43.211:15400/predict",request)
+  .then((response) => response.json())
+  .then((data) => {
+//console.log('DATA',data)
+setOutputData(data);
+})
+  .catch((error) => console.log(error))
+
+};
+
   const chooseImage = async index => {
     const newImg = [...image];
 
@@ -86,6 +121,7 @@ const SelectedtextInput = ({navigation, route}) => {
       }
     });
   };
+  console.log('OUTPUT DATA',outputData)
 
   return (
     <ScrollView>
@@ -130,7 +166,8 @@ const SelectedtextInput = ({navigation, route}) => {
           <View style={styles.buttonView}>
             <TouchableOpacity
               style={styles.getValueBtn}
-              onPress={() => showInput()}>
+              onPress={() => {showInput()
+              navigation.navigate('Output',{outputData: outputData})}}>
               <Text
                 style={{
                   color: 'white',
