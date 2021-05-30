@@ -28,10 +28,10 @@ const SelectedtextInput = ({navigation, route}) => {
   const {camFieldLength} = route.params;
   const [image, setImage] = useState([]);
   const [fields, setFields] = useState([]);
+  const [outputData, setOutputData] = useState('');
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    // console.log('CamLength', camFieldLength);
     const values = [];
     const dimg = [];
     const AddInputs = () => {
@@ -39,7 +39,6 @@ const SelectedtextInput = ({navigation, route}) => {
         values.push({value: '', index: i});
         setFields(values);
       }
-      // console.log('UseEffect AddInput Called');
     };
 
     const AddDummyImage = () => {
@@ -63,12 +62,31 @@ const SelectedtextInput = ({navigation, route}) => {
     values[i].index = i;
     setFields(values);
   };
+
   const showInput = () => {
-    console.log('TEXTFIELD', fields);
-    console.log('IMAGE', image);
+    // console.log('TEXTFIELD', fields);
+    // console.log('IMAGE', image);
+    let request = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        variance: fields[0].value,
+        skewness: fields[1].value,
+        curtosis: fields[2].value,
+        entropy: fields[3].value,
+      }),
+    };
+    fetch('http://192.168.43.211:15400/predict', request)
+      .then(response => response.json())
+      .then(data => {
+        setOutputData(data.prediction);
+      })
+      .catch(error => console.log(error));
   };
 
-  // Camera Handling Functions
   const chooseImage = async index => {
     const newImg = [...image];
 
@@ -86,6 +104,7 @@ const SelectedtextInput = ({navigation, route}) => {
       }
     });
   };
+  //console.log('OUTPUT DATA',outputData)
 
   return (
     <ScrollView>
@@ -130,7 +149,10 @@ const SelectedtextInput = ({navigation, route}) => {
           <View style={styles.buttonView}>
             <TouchableOpacity
               style={styles.getValueBtn}
-              onPress={() => showInput()}>
+              onPress={() => {
+                showInput();
+                navigation.navigate('Output', {outputData: outputData});
+              }}>
               <Text
                 style={{
                   color: 'white',

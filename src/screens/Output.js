@@ -1,33 +1,34 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 const Output = ({navigation, route}) => {
-  const {item} = route.params;
-  // console.warn(item);
+  const {outputData} = route.params;
+  console.log(outputData);
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text
-        style={{fontFamily: 'Poppins-Bold', fontSize: 25, marginBottom: 20}}>
-        Your Output
-      </Text>
-      <View
-        style={{
-          display: 'flex',
-          padding: 40,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderWidth: 1,
-          borderColor: 'black',
-          backgroundColor: 'black',
-          borderRadius: 10,
-        }}>
-        <Text
-          style={{fontFamily: 'Poppins-Regular', color: 'white', fontSize: 18}}>
-          {item}
-        </Text>
+    <View>
+      <View style={styles.outputBox}>
+        <Text style={styles.outputText}>{outputData}</Text>
       </View>
     </View>
   );
 };
 
 export default Output;
+
+const styles = StyleSheet.create({
+  outputBox: {
+    backgroundColor: '#2e0547',
+    width: 300,
+    height: 400,
+    marginLeft: 30,
+    marginTop: 30,
+    marginBottom: 30,
+    borderRadius: 10,
+    borderColor: '#C71585',
+    borderWidth: 4,
+    padding: 10,
+  },
+  outputText: {
+    fontSize: 20,
+  },
+});
