@@ -7,13 +7,7 @@ const Output = ({navigation, route}) => {
   return (
     <View>
       <View style={styles.outputBox}>
-<<<<<<< HEAD
         <Text style={styles.outputText}>{outputData}</Text>
-=======
-        <Text style={styles.outputText}>
-          {outputData}
-        </Text>
->>>>>>> f385054245d2104297926c9c8d68cf7db63fe3c0
       </View>
     </View>
   );
@@ -36,11 +30,5 @@ const styles = StyleSheet.create({
   },
   outputText: {
     fontSize: 20,
-<<<<<<< HEAD
   },
 });
-=======
-    
-  }
-})
->>>>>>> f385054245d2104297926c9c8d68cf7db63fe3c0
