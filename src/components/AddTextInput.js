@@ -28,7 +28,7 @@ const AddTextInput = ({navigation}) => {
 
   // Sending no. of blocks to other(home) screen
   function showInput() {
-    console.log(fields);
+    // console.log(fields);
     navigation.navigate('SelectedInput', {fieldsLength: fields.length});
   }
 

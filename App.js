@@ -6,6 +6,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Feather from 'react-native-vector-icons/Feather';
 
 // Components
+
 import Home from './src/screens/Home';
 import Input from './src/screens/Input';
 import Output from './src/screens/Output';

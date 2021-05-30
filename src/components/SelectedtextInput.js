@@ -28,6 +28,7 @@ const SelectedtextInput = ({navigation, route}) => {
   const {camFieldLength} = route.params;
   const [image, setImage] = useState([]);
   const [fields, setFields] = useState([]);
+
   const [outputData, setOutputData] = useState('');
   const isFocused = useIsFocused();
 
