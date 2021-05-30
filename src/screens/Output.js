@@ -6,6 +6,11 @@ const Output = ({navigation, route}) => {
   console.log(outputData);
   return (
     <View>
+      <View>
+        <Text style={styles.text}>
+          Result
+        </Text>
+      </View>
       <View style={styles.outputBox}>
         <Text style={styles.outputText}>
           {outputData}
@@ -19,19 +24,24 @@ export default Output;
 
 const styles = StyleSheet.create({
   outputBox: {
-    backgroundColor: '#2e0547',
+    backgroundColor: 'deepskyblue',
     width: 300,
     height: 400,
     marginLeft: 30,
     marginTop: 30,
     marginBottom: 30,
     borderRadius: 10,
-    borderColor: '#C71585',
+    borderColor: '#2e0547',
     borderWidth: 4,
     padding: 10,
   },
   outputText: {
     fontSize: 20,
     
+  },
+  text: {
+    fontSize: 30,
+    textAlign: 'center',
+    paddingTop: 25,
   }
 })

@@ -32,7 +32,7 @@ const SelectedtextInput = ({navigation, route}) => {
   const {camFieldLength} = route.params;
   const [image, setImage] = useState([]);
   const [fields, setFields] = useState([]);
-  const[outputData,setOutputData]= useState("")
+  const[outputData,setOutputData]= useState()
   const isFocused = useIsFocused();
 
   useEffect(() => {
@@ -166,8 +166,11 @@ const SelectedtextInput = ({navigation, route}) => {
           <View style={styles.buttonView}>
             <TouchableOpacity
               style={styles.getValueBtn}
-              onPress={() => {showInput()
-              navigation.navigate('Output',{outputData: outputData})}}>
+              onPress={() => {
+                showInput(),
+                navigation.navigate('Output',{outputData: outputData})
+                }
+                }>
               <Text
                 style={{
                   color: 'white',
