@@ -12,9 +12,7 @@ const Output = ({navigation, route}) => {
         </Text>
       </View>
       <View style={styles.outputBox}>
-        <Text style={styles.outputText}>
-          {outputData}
-        </Text>
+        <Text style={styles.outputText}>{outputData}</Text>
       </View>
     </View>
   );
@@ -37,11 +35,5 @@ const styles = StyleSheet.create({
   },
   outputText: {
     fontSize: 20,
-    
   },
-  text: {
-    fontSize: 30,
-    textAlign: 'center',
-    paddingTop: 25,
-  }
-})
+});

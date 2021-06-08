@@ -32,6 +32,7 @@ const AddTextInput = ({navigation}) => {
     navigation.navigate('SelectedInput', {fieldsLength: fields.length});
   }
 
+  const fieldInput = ['variance', 'skewness', 'curtosis', 'entropy'];
   return (
     <ScrollView>
       <View style={{marginTop: 60}}>
@@ -62,7 +63,9 @@ const AddTextInput = ({navigation}) => {
                     style={{
                       fontFamily: 'Poppins-Medium',
                       fontSize: 18,
-                    }}>{`Input ${idx + 1}`}</Text>
+                    }}>
+                    {fieldInput[idx]}
+                  </Text>
                 </View>
               </View>
             );
